@@ -1,6 +1,6 @@
 # Introduction to ML
 
-<p align="justify">This document contains notes for lecture 1 on Machine Learning for CS229 at Stanford by Andrew Ng.</p>
+<p align="justify">This document contains notes for lecture 1 on Machine Learning for CS229 at Stanford by Dr. Andrew Ng.</p>
 
 <p align="justify">Prerequisites for understanding the notes that follow- </p>
 
@@ -14,7 +14,7 @@
 <p align="justify">Arthur Samuel (1959) - ""Field of study that gives computers the ability to learn without explicitly being programmed"
 </p>
 
-<p align="justify">Tom Mitchell (1998) - "Computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P improves with experience E" - Asshole
+<p align="justify">Tom Mitchell (1998) - "Computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P improves with experience E"
 </p>
 
 ## Supervised Learning

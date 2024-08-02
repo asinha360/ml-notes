@@ -1,6 +1,6 @@
 # Linear Regression and Gradient Descent
 
-<p align="justify">This document contains notes for lecture 2 on Machine Learning for CS229 at Stanford by Andrew Ng.</p>
+<p align="justify">This document contains notes for lecture 2 on Machine Learning for CS229 at Stanford by Dr. Andrew Ng.</p>
 
 Topics discussed in lecture
 
@@ -33,7 +33,9 @@ Key Decisions:
 - What is the dataset?
 - What is the hypothesis?
 - How is the hypothesis represented? - First thing you need to ask
-  - $$h(x) = O_{0} + O_{1}x$$ technically an affine function; but in ML we call it linear
+$$h(x) = O_{0} + O_{1}x$$ 
+
+technically an affine function; but in ML we call it linear
 
 ## Housing Market Prediction
 
@@ -68,15 +70,14 @@ The learning algorithm's first job is to choose the values for parameters $\thet
 
 Choose $\theta$ so that such that $$h(x) \approxeq y$$ for the training examples
 
-Since $h_{x}$ depends on parameters $\theta$ and on input features $x$ we use 
-$$h_{\theta} x = h(x)$$
+Since $h_{x}$ depends on parameters $\theta$ and on input features $x$ we use $h_{\theta} x = h(x)$
 
 ### What makes Linear Regression accurate = Minimizing $J(\theta)$
 
 One goal within the linear regression algorithm is to minimize the square difference between what the hypothesis outputs (prediction) and the correct price.
 
 Formally written - the goal is to minimize $\theta$ for $J(\theta)$ where - 
-$$J(\theta) = \frac{1}{2} \Sigma^{m}_{i = 1} (h_{\theta} (x^{i} - y)^{2}$$
+$$J(\theta) = \frac{1}{2} \Sigma^{m}_{i = 1} (h_{\theta} (x^{i} - y))^{2}$$
 
 The $\frac{1}{2}$ constant is put by convention to make it simpler to take derivatives and minimize it later.
 
@@ -90,7 +91,7 @@ We start with some value of $\theta$ where we can say $\theta = \vec 0$ as a rea
 
 We keep changing $\theta$ to reduce $J(\theta)$
 
-<p align = "center">3-D Gradient Descent for any hypothesis with 2 parameters$</p>
+<p align = "center">3-D Gradient Descent for any hypothesis with 2 parameters</p>
 <p align = "justify"> 
     <img src="./images/gradient-descent-visual.png" alt="3-D figure showing surface map of $J(\theta)$ against parameters $O_{0}$ and $O_{1}$" title="3-D Gradient Descent for any $h(x) = O_{0} + O_{1}x_(1)$">
 </p>
@@ -109,6 +110,32 @@ When you run a GD algorithm (GDA) on linear regression = there won't be a local 
 
 Each step of Gradient Descent is as follows:
 
-$$\theta_{J} := \theta{J} - \alpha \frac{\delta}{\delta\theta_{j}} J(\theta)$$
+$$\theta_{J} := \theta{J} - \alpha \frac{\delta J(\theta)}{\delta\theta_{j}}$$
 
-where $\alpha$ is the "learning Rate" 
+where $\alpha$ is the "learning Rate"
+
+The derivative of a function defines the direction of steepest descent
+
+Lets' assume there is only 1 training example $(x^{1}, y^{1})$ - in reality - we will have a sum over i = 1 to m in the equation below
+
+$$\begin{align} \frac{\delta}{\delta \theta_{j}} J(\theta) & = \frac{\delta}{\delta \theta_{j}} \frac{1}{2} (h_{\theta}(x) - y)^{2} \\ & = 2 \frac{1}{2} (h_{\theta}(x) - y) \cdot \frac{\delta}{\delta \theta_{j}} (h_{\theta}(x) - y) \\ & = (h_{\theta}(x) - y) \cdot \frac{\delta}{\delta \theta_{j}} ( \Sigma^{d}_{i = 0} \theta_{i} - y) \\ & = (h_{\theta}(x) - y) \ x_{j} \end{align}$$
+
+For a single training example this gives us this update rule:
+
+$$ \theta_{j} := \theta_{j} + \alpha \ (y^{i} - h_{\theta}(x^{i})) \ x^{i}_{j} $$
+
+This repeats until convergence in the Gradient Descent Algorithm and occurs iteratively from 0 to n.
+
+### LMS update Rule / Widrow-Hoff learning rule
+
+This is the actual formula for the cost function $J(\theta)$ when it is defined using all available training sets.
+
+The magnitude of the update is proportional to the error term $(y^{i} - h_{\theta}(x^{i}))$ which means that if a training example where our prediction is very close to $y^{i}$, there is little need to change parameters ($\theta$). The inverse is true when a larger error in our prediction $h_{\theta}(x^{i})$ produces a larger change to $\theta$. 
+
+### The Gradient Descent Algorithm 
+
+THe goal of the Gradient Descent algorithm is to repeat until convergence from 0 to n for j in $\theta$
+
+If $J(\theta)$ is defined by sum of squared terms for linear regression, we get a quadratic function which only has global optima (no local optima as defined by LSE) which looks like a big bow.
+
+# Note - At this point, I realized I don't understand how the Gradient Descent photo with 2 local minima and $J(\theta)$ cost function fis into the big picture for the Gradient Descent Algorithm where $J(\theta)$ is updated to convergence to find a global optima for the optimal $\theta_{0..n}$ / parameters / weights. - I plan to read the course notes and watch the lecture video before coming back to these notes.
